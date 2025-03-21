@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_pickers/services/api_service.dart';
-import '../services/api_service.dart'; // Import the ApiService
-import 'view_images.dart'; // Import the ViewImagesScreen
+import '../services/api_service.dart'; 
+import 'view_images.dart';
 
 class UploadImageScreen extends StatefulWidget {
   @override
@@ -16,13 +16,41 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
   final TextEditingController _commentController = TextEditingController();
   bool _isUploading = false; // Track upload status to show loading indicator
 
-  Future<void> _pickImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await picker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
       });
     }
+  }
+
+  void _showImageSourceDialog() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Wrap(
+          children: [
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Take a Photo'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Choose from Gallery'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.gallery);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _uploadImage() async {
@@ -92,7 +120,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: _pickImage,
+              onPressed: _showImageSourceDialog,
               child: Text('Select Image'),
             ),
             SizedBox(height: 10),
