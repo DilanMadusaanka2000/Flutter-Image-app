@@ -14,7 +14,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
   File? _image;
   final picker = ImagePicker();
   final TextEditingController _commentController = TextEditingController();
-  bool _isUploading = false; // Track upload status to show loading indicator
+  bool _isUploading = false; 
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
@@ -62,7 +62,7 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
     }
 
     setState(() {
-      _isUploading = true; // Show loading indicator
+      _isUploading = true; 
     });
 
     try {
