@@ -97,9 +97,9 @@ class _UploadImageScreenState extends State<UploadImageScreen> {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: _isUploading ? null : _uploadImage, // Disable button while uploading
+              onPressed: _isUploading ? null : _uploadImage, 
               child: _isUploading
-                  ? CircularProgressIndicator(color: Colors.white) // Show a loading spinner
+                  ? CircularProgressIndicator(color: Colors.white) 
                   : Text('Upload'),
             ),
           ],

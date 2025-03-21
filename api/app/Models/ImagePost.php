@@ -9,9 +9,9 @@ class ImagePost extends Model
 {
     use HasFactory;
 
-    protected $table = 'image_posts'; // Ensure it matches your migration table name
+    protected $table = 'image_posts';
 
-    protected $fillable = ['image_url', 'comment']; // Specify which fields are mass assignable
+    protected $fillable = ['image_url', 'comment'];
 
-    public $timestamps = true; // Ensures timestamps are managed properly
-}
+    public $timestamps = true;
+};
